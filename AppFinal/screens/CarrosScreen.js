@@ -11,23 +11,25 @@ export default function CarrosScreen() {
 
   useEffect(() => {
     axios.get(API_URL)
-      .then(response => {
-        setProdutos(response.data)
-      })
-      .catch(error => {
-        console.log('Erro ao buscar os produtos', error)
-      })
-      .finally(() => {
-        setLoading(false)
-      })
-  })
+      .then(response => setProdutos(response.data))
+      .catch(error => console.log('Erro ao buscar os produtos', error))
+      .finally(() => setLoading(false))
+  }, [])
 
   const renderItem = ({ item }) => (
     <Card style={styles.card}>
-      <Card.Cover source={{ uri: item.imagem }} />
-      <Card.Title title={item.nome} subtitle={item.descricao} />
+      <Card.Cover 
+        source={{ uri: item.imagem }} 
+        style={styles.cover}
+      />
+
+      <Card.Title titleStyle={styles.nome}
+        title={`${item.marca} ${item.modelo}`}
+      />
+
       <Card.Content>
-        <Text style={styles.preco}>{item.preco}</Text>
+        <Text style={styles.ano}>Ano: {item.ano}</Text>
+        <Text style={styles.cor}>Cor: {item.cor}</Text>
       </Card.Content>
     </Card>
   )
@@ -39,8 +41,14 @@ export default function CarrosScreen() {
       ) : (
         <FlatList
           data={produtos}
-          keyExtractor={(item) => item.id}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={renderItem}
+          showsVerticalScrollIndicator={false}
+          numColumns={3}
+          contentContainerStyle={{
+            paddingBottom: 16,
+            alignItems: 'center'
+          }}
         />
       )}
     </View>
@@ -51,18 +59,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#88c5e4'
+    backgroundColor: '#5c00d4ff'
   },
-  card: {
 
-    marginBottom: 12,
+  card: {
+    width: 280,
+    margin: 8,
     borderRadius: 10,
     elevation: 3,
-    backgroundColor: '#e5c1f3ff',
-    width: 280
+    backgroundColor: '#fff',
   },
-  preco: {
-    marginTop: 8,
-    fontWeight: 'bold'
+
+  cover: {
+    height: 160,
+  },
+
+  nome: {
+    fontWeight: 'bold',
+    fontSize: 22,
+  },
+
+  ano: {
+    marginTop: 4,
+    fontSize: 15,
+  },
+  
+  cor: {
+    marginTop: 2,
+    fontSize: 15,
   }
 })

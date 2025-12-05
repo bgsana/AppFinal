@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from "@react-navigation/stack";
 import CalculoScreen from './screens/CalculoScreen';
 import HomeScreen from './screens/HomeScreen';
-import CarrosScreen from './screens/CalculoScreen';
+import CarrosScreen from './screens/CarrosScreen';
 
 const Stack = createStackNavigator()
 

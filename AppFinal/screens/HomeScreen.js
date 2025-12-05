@@ -1,13 +1,24 @@
 import { View, Text, StyleSheet, Button } from 'react-native'
 
-
 export default function HomeScreen({ navigation }) {
     return (
         <View style={styles.container}>
-            <Text>Tela Inicial</Text>
+            <Text style={styles.titulo}>Home do App Final</Text>
+
             <View style={styles.botao}>
-                <Button title='Ir para Cálculo de Desconto' onPress={() => navigation.navigate('Calculo')}/>
-                <Button title='Ir exibição de Carros' onPress={() => navigation.navigate('Carros')}/>
+                <Button 
+                    title='Calcular Desconto'
+                    color="#5C00D4"
+                    onPress={() => navigation.navigate('Calculo')}
+                />
+
+                <View style={{ height: 12 }} />
+
+                <Button 
+                    title='Exibição de Carros'
+                    color="#5C00D4"
+                    onPress={() => navigation.navigate('Carros')}
+                />
             </View>
         </View>
     )
@@ -16,12 +27,18 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e5e5e5',
+        backgroundColor: '#ffffffff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: 20
+    },
+    titulo: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#5C00D4',
+        marginBottom: 30
     },
     botao: {
-        width: '60%',
-        marginTop: 20
+        width: '30%',
     }
 })
